@@ -5,5 +5,5 @@ Simple-Banking:
 - As a user I should be able to request an overdraft
 - As a user I should be receive overdraft request response
 
-To run the app type in the console: ruby app/bank_account.rb
-To run the test: rspec spec/bank_account_spec.rb
+- To run the app type in the console: ruby app/bank_account.rb
+- To run the test: rspec spec/bank_account_spec.rb
