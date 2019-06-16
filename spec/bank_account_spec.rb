@@ -1,27 +1,19 @@
-require "bank_account"
+require "./app/bank_account"
 
 describe BankAccount do
-  let(:account) { BankAccount.new("John Lennon", 200) }
+  let(:account) { BankAccount.new("John", 200, 0) }
 
   describe 'Getters' do
     it 'has a way to access the account name' do
-      expect(account.name).to eq 'John Lennon'
+      expect(account.name).to eq 'John'
     end
 
     it 'has a way to access the account balance' do
       expect(account.balance).to be_a Integer
     end
-  end
 
-  describe '#add_transaction (private)' do
-    it 'add transactions to your account' do
-      account.send(:add_transaction, 200)
-      expect(account.instance_variable_get(:@transactions).length).to eq 2
-    end
-
-    it 'update its balance when a new transaction is made' do
-      account.send(:add_transaction, -100)
-      expect(account.balance).to eq 100
+    it 'has a way to access the overdraft' do
+      expect(account.overdraft).to be_a Integer
     end
   end
 
@@ -44,6 +36,13 @@ describe BankAccount do
 
     it 'returns a message containing the deposit amount' do
       expect(account.deposit(150)).to match /150/
+    end
+  end
+
+  describe '#overdraft' do
+    it 'changes the account overdraft' do
+      account.set_overdraft
+      expect(account.set_overdraft).to eq -150
     end
   end
 end

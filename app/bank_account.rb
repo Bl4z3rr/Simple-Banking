@@ -1,12 +1,12 @@
 class BankAccount
   attr_reader :name
-  attr_writer :balance, :overdraft
+  attr_accessor :balance, :overdraft
 
-  def initialize(name, balance)
+  def initialize(name, balance, overdraft)
 
     @name         = name
     @balance      = balance
-    @overdraft    = 0
+    @overdraft    = overdraft
   end
 
   def withdraw(amount)
@@ -14,7 +14,7 @@ class BankAccount
       @balance -= amount
       "You've just withdrawn #{amount} euros. Your balance is: #{@balance}"
     elsif amount > @balance && @overdraft == 0
-      "Insufficient funds. To request €150 overdraft type: account.overdraft"
+      "Insufficient funds. To request 150 overdraft type: account.set_overdraft"
     elsif (@balance - amount) >= @overdraft
       @balance -= amount
       "You've just withdrawn #{amount} euros. Your balance is: #{@balance}"
@@ -28,15 +28,14 @@ class BankAccount
     "You've just deposited #{amount} euros. Your balance is: #{@balance}"
   end
 
-  def overdraft
+  def set_overdraft
     @overdraft = -150
-    "You've been granted an overdraft: €150"
   end
 end
 
-p account = BankAccount.new("Ben", 100)
+p account = BankAccount.new("Ben", 100, 0)
 p account.withdraw(150)
-p account.overdraft
+p account.set_overdraft
 p account.withdraw(350)
 p account.withdraw(150)
 p account.deposit(1000)
